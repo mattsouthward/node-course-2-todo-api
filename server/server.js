@@ -1,3 +1,5 @@
+require('./config/config');
+
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,9 +9,8 @@ var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
-
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -33,7 +34,6 @@ app.get('/todos', (req, res) => {
   });
 });
 
-/// GET /todos/1233
 app.get('/todos/:id', (req, res) => {
   var id = req.params.id;
   
@@ -99,7 +99,5 @@ app.patch('/todos/:id', (req,res) => {
 app.listen(port, () => {
   console.log(`Started on port ${port}...`);
 });
-
-
 
 module.exports = {app};
